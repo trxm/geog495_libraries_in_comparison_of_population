@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Libraries in Washington School Districts</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js">
+    </script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+        type="text/css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoidHJ4bSIsImEiOiJja2tyYXQzenMwOWZ2Mnhyb2U0NTIwOG92In0.-agHRG_HasfvVQjWA-gI5A';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-120.7401, 47.2511],
+            zoom: 6.7
+        });
+
+        // Add the control to the map.
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
+
+        async function geojsonFetch() {
+        let response, libraries, districts;
+        response = await fetch('assets/wa_library.geojson');
+        libraries = await response.json();
+        response = await fetch('assets/wa_school_districts_boundaries.geojson');
+        districts = await response.json();
+        //load data to the map as new layers and table on the side.
+        map.on('load', function loadingData() {
+          map.addSource('libraries', {
+            type: 'geojson',
+            data: libraries
+          });
+
+          map.addLayer({
+            'id': 'libraries-layer',
+            'type': 'circle',
+            'source': 'libraries',
+            'paint': {
+              'circle-radius': 5,
+              'circle-stroke-width': 1,
+              'circle-color': 'green',
+              'circle-stroke-color': 'white'
+            }
+          });
+
+          map.addSource('districts', {
+            type: 'geojson',
+            data: districts
+          });
+
+          map.addLayer({
+            'id': 'districts-layer',
+            'type': 'fill',
+            'source': 'districts',
+            'paint': {
+              'fill-color': '#7d7d7d',
+              'fill-opacity': 0.1,
+              'fill-outline-color': 'white'
+            }
+          });
+        });
+      }
+
+      geojsonFetch();
+    </script>
+
+</body>
+
+</html>
