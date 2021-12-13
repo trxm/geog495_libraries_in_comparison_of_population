@@ -57,6 +57,8 @@
         libraries = await response.json();
         response = await fetch('assets/wa_school_districts_boundaries.geojson');
         districts = await response.json();
+        response = await fetch('assets/public_schools.geojson');
+        schools = await response.json();
         //load data to the map as new layers and table on the side.
         map.on('load', function loadingData() {
           map.addSource('libraries', {
@@ -89,6 +91,23 @@
               'fill-color': '#7d7d7d',
               'fill-opacity': 0.2,
               'fill-outline-color': 'white'
+            }
+          });
+
+          map.addSource('schools', {
+            type: 'geojson',
+            data: schools
+          });
+
+          map.addLayer({
+            'id': 'schools-layer',
+            'type': 'circle',
+            'source': 'schools',
+            'paint': {
+              'circle-radius': 5,
+              'circle-stroke-width': 1,
+              'circle-color': 'red',
+              'circle-stroke-color': 'white'
             }
           });
         });

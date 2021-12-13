@@ -3,7 +3,7 @@
 ## Description
 A simple map where you search for specific cities and look at the libraries in defined school districts.
 
-The main goal of this map is to show all the libraries in Washington State and where they are mainly concentrated. I wanted to see if there were any correlations between cities, school districts and the amount of libraries. I believe that having public access to libraries is extremely beneficials to the general population, especially young children or students. Therefore, I wanted to see the relationships between cities/school districts and concentration of libraries.
+The main goal of this map is to show all the libraries in Washington State and where they are mainly concentrated. I wanted to see if there were any correlations between cities, school districts and the amount of libraries. I believe that having public access to libraries is extremely beneficials to the general population, especially young children or students. Therefore, I wanted to see the relationships between cities/school districts and concentration of libraries. Data for public school is also added to compare proximity between the schools and the libraries.
 
 [Application URL](https://trxm.github.io/geog495_libraries_in_comparison_of_population/)
 
