@@ -8,8 +8,8 @@ The main goal of this map is to show all the libraries in Washington State and w
 [Application URL](https://trxm.github.io/geog495_libraries_in_comparison_of_population/)
 
 ## Screenshots
-![photo of map application, state level](/assets/img/far_map.png)
-![photo of map application, zoomed to Seattle](/assets/img/filtered_map.png)
+![photo of map application, state level](/assets/img/far_map1.png)
+![photo of map application, zoomed to Seattle](/assets/img/filtered_map1.png)
 
 
 ## Functions
